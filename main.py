@@ -45,30 +45,20 @@ script_dir = os.path.dirname(
 # LOAD MODEL
 # -----------------------------------
 
+model = None
+class_names = None
+
+
+model_path = os.path.join(script_dir, "Brain_Tumor_Detection_System.keras")
+
+if not os.path.exists(model_path):
+    raise FileNotFoundError(f"Model file not found: {model_path}")
+
 try:
-
-    model_path = os.path.join(
-        script_dir,
-        "Brain_Tumor_Detection_System.keras"
-    )
-
-    if not os.path.exists(model_path):
-
-        raise FileNotFoundError(
-            f"Model file not found: {model_path}"
-        )
-
-    model = tf.keras.models.load_model(
-        model_path
-    )
-
+    model = tf.keras.models.load_model(model_path)
     print("Model Loaded Successfully")
-
 except Exception as e:
-
-    print("Model Loading Error")
-
-    print(e)
+    raise RuntimeError(f"Model loading failed: {str(e)}")
 
 
 # -----------------------------------
@@ -154,9 +144,14 @@ def home():
 @app.post("/predict")
 
 async def predict(file: UploadFile = File(...)):
+
+    if model is None or class_names is None:
+        return JSONResponse(status_code=500,content={"error": "Model not loaded properly"})
   
 
     try:
+
+        
 
         # check file uploaded
         if file is None:
