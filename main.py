@@ -51,14 +51,14 @@ class_names = None
 
 model_path = os.path.join(script_dir, "Brain_Tumor_Detection_System.keras")
 
-if not os.path.exists(model_path):
-    raise FileNotFoundError(f"Model file not found: {model_path}")
+print("Looking for model at:", model_path)
+print("Directory files:", os.listdir(script_dir))
 
-try:
-    model = tf.keras.models.load_model(model_path)
-    print("Model Loaded Successfully")
-except Exception as e:
-    raise RuntimeError(f"Model loading failed: {str(e)}")
+if not os.path.exists(model_path):
+    raise FileNotFoundError(f"Model not found at: {model_path}")
+
+model = tf.keras.models.load_model(model_path, compile=False)
+print("Model Loaded Successfully")
 
 
 # -----------------------------------
