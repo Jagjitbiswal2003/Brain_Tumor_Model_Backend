@@ -49,7 +49,7 @@ model = None
 class_names = None
 
 
-model_path = os.path.join(script_dir, "Brain_Tumor_Detection_System.keras")
+model_path = os.path.join(script_dir, "Brain_Tumor_Detection_System.h5")
 
 print("Looking for model at:", model_path)
 print("Directory files:", os.listdir(script_dir))
