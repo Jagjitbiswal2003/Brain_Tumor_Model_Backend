@@ -49,7 +49,7 @@ model = None
 class_names = None
 
 
-model_path = os.path.join(script_dir, "Brain_Tumor_Detection_System.h5")
+model_path = os.path.join(script_dir, "Brain_Tumor_Detection_Model.h5")
 
 print("Looking for model at:", model_path)
 print("Directory files:", os.listdir(script_dir))
@@ -107,10 +107,9 @@ def preprocess_image(image_file):
 
         image = np.array(image)
 
-        image = np.expand_dims(
-            image,
-            axis=0
-        )
+        image = tf.keras.applications.efficientnet.preprocess_input(image)
+
+        image = np.expand_dims(image,axis=0)
 
         return image
 
