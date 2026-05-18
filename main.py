@@ -49,7 +49,7 @@ model = None
 class_names = None
 
 
-model_path = os.path.join(script_dir, "Brain_Tumor_Detection_Model.h5")
+model_path = os.path.join(script_dir, "Brain_Tumor_Detection_Final_Model.h5")
 
 print("Looking for model at:", model_path)
 print("Directory files:", os.listdir(script_dir))
@@ -69,7 +69,7 @@ try:
 
     class_path = os.path.join(
         script_dir,
-        "class_names.json"
+        "Final_class_names.json"
     )
 
     if not os.path.exists(class_path):
